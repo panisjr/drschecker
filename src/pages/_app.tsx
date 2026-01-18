@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import { createContext, useContext } from "react";
 import { useState, ReactNode } from "react";
 import Swal from "sweetalert2";
+import Head from "next/head";
 
 export interface User {
   currentUserEmail?: string;
@@ -13,6 +14,7 @@ export interface User {
   password: string;
   date: string;
   role: string;
+  avatar: string;
 }
 
 export interface AuthProps {
@@ -28,7 +30,7 @@ interface UserContextType {
 }
 
 export const UserContext = createContext<UserContextType | undefined>(
-  undefined
+  undefined,
 );
 
 const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -62,10 +64,15 @@ export const UseUser = () => {
 };
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <UserProvider>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </UserProvider>
+    <>
+      <Head>
+        <title>DRSChecker | Depression Rating Scale Checker</title>
+      </Head>
+      <UserProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </UserProvider>
+    </>
   );
 }
