@@ -38,13 +38,13 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link
-              href="/check"
+              href="/dashboard"
               className="px-8 py-4 bg-gradient-to-r from-blue-500 to-emerald-500 text-white font-semibold rounded-full hover:shadow-lg hover:shadow-blue-500/30 transform hover:-translate-y-1 transition-all duration-300"
             >
               Start Free Assessment
             </Link>
             <Link
-              href="/about"
+              href="#"
               className="px-8 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border border-white/30 hover:bg-white/20 transition-all duration-300"
             >
               Learn More
@@ -325,7 +325,7 @@ export default function Home() {
               Our assessment is free, private, and takes just a few minutes.
             </p>
             <Link
-              href="/check"
+              href="/dashboard"
               className="inline-block px-10 py-4 bg-white text-blue-600 font-bold rounded-full hover:shadow-lg hover:shadow-white/30 transform hover:-translate-y-1 transition-all duration-300"
             >
               Start Free Assessment →
