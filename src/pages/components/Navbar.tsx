@@ -93,6 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ isDashboard }) => {
                     src="/images/logo.png"
                     alt="DRSchecker Logo"
                     fill
+                    sizes="100vw"
                     className="object-contain"
                     priority
                   />

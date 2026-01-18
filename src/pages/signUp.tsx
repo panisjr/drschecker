@@ -55,6 +55,7 @@ const SignUp = () => {
             year: "numeric",
           }),
           role: "",
+          avatar: "",
         },
       ]);
       setFirstname("");

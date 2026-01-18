@@ -182,6 +182,7 @@ const SignIn = () => {
                 src="/images/logo.png"
                 alt="DRSchecker Logo"
                 fill
+                sizes="100vw"
                 className="object-contain brightness-0 invert"
               />
             </div>
