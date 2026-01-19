@@ -113,9 +113,9 @@ const Navbar: React.FC<NavbarProps> = ({ isDashboard }) => {
                 <div className="flex items-center gap-6">
                   {[
                     { href: "/", label: "Home" },
-                    { href: "/about", label: "About" },
-                    { href: "/resources", label: "Resources" },
-                    { href: "/contact", label: "Contact" },
+                    { href: "#", label: "About" },
+                    { href: "#", label: "Resources" },
+                    { href: "#", label: "Contact" },
                   ].map((link) => (
                     <Link
                       key={link.href}
