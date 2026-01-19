@@ -138,11 +138,12 @@ const Questions = () => {
       values: [0, 1, 2],
     },
   ];
-
+  const answeredCount = Object.keys(selectedItems).length;
+  const progress = (answeredCount / data.length) * 100;
   const handleSelectedItem = (
     question: QuestionProps,
     choice: string,
-    choiceIndex: number
+    choiceIndex: number,
   ) => {
     setSelectedItems((prev) => ({
       ...prev,
@@ -151,14 +152,14 @@ const Questions = () => {
 
     setSelectedQuestion((prevSelected) => {
       const foundSelectedQuestion = prevSelected.some(
-        (q) => q.question === question.question
+        (q) => q.question === question.question,
       );
 
       let newPoints = points;
 
       if (foundSelectedQuestion) {
         const previousSelection = prevSelected.find(
-          (q) => q.question === question.question
+          (q) => q.question === question.question,
         );
 
         if (previousSelection) {
@@ -178,48 +179,228 @@ const Questions = () => {
       ];
     });
   };
+  const getQuestionIcon = (index: number) => {
+    const icons = [
+      "😔",
+      "🌙",
+      "😴",
+      "💤",
+      "🐢",
+      "😰",
+      "🧠",
+      "💓",
+      "🍽️",
+      "💪",
+      "❤️",
+      "🏥",
+      "⚖️",
+      "💡",
+    ];
+    return icons[index] || "📋";
+  };
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center pt-20 pb-5">
-      {data &&
-        data.map((item) => (
-          <div
-            key={item.question}
-            className="w-full max-w-[900px] flex items-center justify-center poppins-regular p-5 border-b-2 border-gray-200"
-          >
-            <div className="w-full md:flex-nowrap flex flex-wrap items-center justify-between gap-3 p-5 md:p-10">
-              <div className="flex flex-col w-full p-2 bg-white">
-                <p className="font-semibold">{item.question}</p>
-                <p className="text-gray-600 pl-5">{item.description}</p>
+    <div className="min-h-screen w-full bg-gradient-to-br from-gray-50 to-gray-100 poppins-regular">
+      {/* Header Section */}
+      <div className="bg-gradient-to-r from-[#37a0ac] to-[#2d8a94] text-white">
+        <div className="max-w-4xl mx-auto px-4 py-12 sm:py-16">
+          <div className="text-center space-y-4">
+            <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+              <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+              Hamilton Depression Rating Scale
+            </div>
+            <h1 className="text-3xl sm:text-4xl font-bold">
+              Depression Assessment
+            </h1>
+            <p className="text-white/80 max-w-2xl mx-auto">
+              Answer each question honestly based on how you&apos;ve been
+              feeling over the past week. Your responses help us provide
+              personalized insights.
+            </p>
+          </div>
+
+          {/* Progress Section */}
+          <div className="mt-8 bg-white/10 backdrop-blur-sm rounded-2xl p-6">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-sm text-white/80">Your Progress</span>
+              <span className="text-sm font-semibold">
+                {answeredCount} of {data.length} questions
+              </span>
+            </div>
+            <div className="h-3 bg-white/20 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-emerald-400 to-emerald-300 rounded-full transition-all duration-500 ease-out"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <div className="flex justify-between mt-2 text-xs text-white/60">
+              <span>Start</span>
+              <span>{Math.round(progress)}% Complete</span>
+              <span>Finish</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Questions Section */}
+      <div className="max-w-4xl mx-auto px-4 py-8 pb-32">
+        <div className="space-y-6">
+          {data.map((item, index) => (
+            <div
+              key={item.question}
+              className={`bg-white rounded-2xl shadow-lg shadow-gray-200/50 overflow-hidden transition-all duration-300 ${
+                selectedItems[item.question]
+                  ? "ring-2 ring-[#37a0ac] ring-opacity-50"
+                  : "hover:shadow-xl"
+              }`}
+            >
+              {/* Question Header */}
+              <div className="p-6 border-b border-gray-100">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <div
+                      className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl ${
+                        selectedItems[item.question]
+                          ? "bg-gradient-to-br from-[#37a0ac] to-[#2d8a94]"
+                          : "bg-gray-100"
+                      }`}
+                    >
+                      {selectedItems[item.question] ? (
+                        <svg
+                          className="w-6 h-6 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M5 13l4 4L19 7"
+                          />
+                        </svg>
+                      ) : (
+                        <span>{getQuestionIcon(index)}</span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="text-xs font-medium text-[#37a0ac] bg-[#37a0ac]/10 px-2 py-1 rounded-full">
+                        Question {index + 1}
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-gray-900">
+                      {item.question}
+                    </h3>
+                    {item.description && (
+                      <p className="text-sm text-gray-500 mt-1">
+                        {item.description}
+                      </p>
+                    )}
+                  </div>
+                </div>
               </div>
-              <div className="w-full border border-gray-300 shadow-md p-5 rounded-md bg-white">
-                {item.choices &&
-                  item.choices.map((choice, choiceIndex) => (
-                    <div key={choiceIndex}>
+
+              {/* Choices */}
+              <div className="p-4 bg-gray-50/50">
+                <div className="grid gap-2">
+                  {item.choices.map((choice, choiceIndex) => {
+                    const isSelected = selectedItems[item.question] === choice;
+                    return (
                       <button
+                        key={choiceIndex}
                         onClick={() =>
                           handleSelectedItem(item, choice, choiceIndex)
                         }
-                        aria-label={`Select ${choice}`}
-                        className={`text-[14px] md:text-[16px] w-full flex items-center justify-between px-5 py-3 border-b border-b-gray-400 hover:bg-cyan-100 cursor-pointer 
-                    ${
-                      selectedItems[item.question] === choice
-                        ? "bg-cyan-100"
-                        : ""
-                    }`}
-                        disabled={selectedItems[item.question] === choice}
+                        className={`group relative w-full text-left px-5 py-4 rounded-xl border-2 transition-all duration-300 ${
+                          isSelected
+                            ? "border-[#37a0ac] bg-gradient-to-r from-[#37a0ac]/10 to-[#2d8a94]/10"
+                            : "border-gray-200 bg-white hover:border-[#37a0ac]/50 hover:bg-[#37a0ac]/5"
+                        }`}
                       >
-                        <span className="font-medium">{choice}</span>
-                        <span>{choiceIndex}</span>
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4">
+                            <div
+                              className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                                isSelected
+                                  ? "border-[#37a0ac] bg-[#37a0ac]"
+                                  : "border-gray-300 group-hover:border-[#37a0ac]"
+                              }`}
+                            >
+                              {isSelected && (
+                                <svg
+                                  className="w-4 h-4 text-white"
+                                  fill="none"
+                                  viewBox="0 0 24 24"
+                                  stroke="currentColor"
+                                >
+                                  <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={3}
+                                    d="M5 13l4 4L19 7"
+                                  />
+                                </svg>
+                              )}
+                            </div>
+                            <span
+                              className={`font-medium transition-colors ${
+                                isSelected ? "text-[#37a0ac]" : "text-gray-700"
+                              }`}
+                            >
+                              {choice}
+                            </span>
+                          </div>
+                          <div
+                            className={`flex items-center gap-2 ${
+                              isSelected ? "text-[#37a0ac]" : "text-gray-400"
+                            }`}
+                          >
+                            <span
+                              className={`text-xs font-medium px-2 py-1 rounded-md ${
+                                isSelected
+                                  ? "bg-[#37a0ac] text-white"
+                                  : "bg-gray-100 text-gray-500"
+                              }`}
+                            >
+                              {choiceIndex} pts
+                            </span>
+                          </div>
+                        </div>
                       </button>
-                    </div>
-                  ))}
+                    );
+                  })}
+                </div>
               </div>
             </div>
+          ))}
+        </div>
+
+        {/* Completion Message */}
+        {answeredCount === data.length && (
+          <div className="mt-8 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-2xl p-6 text-white text-center animate-fade-in">
+            <div className="text-4xl mb-3">🎉</div>
+            <h3 className="text-xl font-bold mb-2">Assessment Complete!</h3>
+            <p className="text-white/80">
+              Great job! Scroll down to see your results and personalized
+              advice.
+            </p>
           </div>
-        ))}
-      <Result score={totalScore} />
-      <Advice score={totalScore} selectedQuestion={selectedQuestion} />
+        )}
+      </div>
+
+      {/* Sticky Results */}
+      <Result
+        score={totalScore}
+        answeredCount={answeredCount}
+        totalQuestions={data.length}
+      />
+
+      {/* Advice Section */}
+      {answeredCount === data.length && (
+        <Advice score={totalScore} selectedQuestion={selectedQuestion} />
+      )}
     </div>
   );
 };

@@ -2,7 +2,6 @@ import { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 
 interface LayoutProps {
   children: ReactNode;
@@ -18,10 +17,8 @@ export default function Layout({ children }: LayoutProps) {
   if (!isReady) return null;
 
   const excludePage = ["/signUp", "/signIn"];
-  const excludeFooter = ["/admin", "/admin/users/management"];
 
   const showNavbar = !excludePage.includes(router.pathname);
-  const showFooter = showNavbar && !excludeFooter.includes(router.pathname);
 
   return (
     <>
@@ -34,7 +31,6 @@ export default function Layout({ children }: LayoutProps) {
         />
       )}
       <main className="content">{children}</main>
-      {showFooter && <Footer />}
     </>
   );
 }
