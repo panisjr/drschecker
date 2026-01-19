@@ -19,10 +19,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log("Prompt received:", prompt);
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.0-flash",
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
+      model: "gemini-3-flash-preview",
+      contents: [{ parts: [{ text: prompt }] }],
     });
-
+    console.log(response.text);
     const text =
       response.candidates?.[0]?.content?.parts?.[0]?.text ||
       "No response received.";
