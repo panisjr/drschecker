@@ -183,7 +183,7 @@ const SignIn = () => {
                 alt="DRSchecker Logo"
                 fill
                 sizes="100vw"
-                className="object-contain brightness-0 invert"
+                className="object-contain"
               />
             </div>
             <span className="text-2xl font-bold">
