@@ -4,7 +4,6 @@ import Link from "next/link";
 export default function About() {
   return (
     <div className="w-full min-h-screen flex flex-col lexend-normal bg-gradient-to-b from-white to-gray-50">
-
       {/* Hero Section */}
       <section className="relative w-full py-24 md:py-32 overflow-hidden bg-gradient-to-br from-[#37a0ac] to-[#2d8a94]">
         {/* Decorative Elements */}
@@ -206,30 +205,18 @@ export default function About() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="flex items-center justify-center gap-8">
             {[
               {
-                name: "Dr. Sarah Chen",
-                role: "Chief Medical Officer",
-                bio: "Clinical psychologist with 15+ years of experience in mental health research and practice.",
-                image: "/images/team1.jpg",
-              },
-              {
-                name: "Michael Torres",
+                name: "Ramel Panis",
                 role: "CEO & Co-Founder",
                 bio: "Tech entrepreneur passionate about using technology to solve real-world health challenges.",
-                image: "/images/team2.jpg",
-              },
-              {
-                name: "Dr. Emily Watson",
-                role: "Head of Research",
-                bio: "PhD in Psychology specializing in depression assessment tools and AI applications.",
-                image: "/images/team3.jpg",
+                image: "/images/profile-formal.jpg",
               },
             ].map((member, index) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 text-center group"
+                className="max-w-[400px] bg-white/10 backdrop-blur-sm rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 text-center group"
               >
                 <div className="relative w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden ring-4 ring-white/20 group-hover:ring-emerald-400/50 transition-all duration-300">
                   <Image
@@ -329,7 +316,7 @@ export default function About() {
             <div className="flex-1 relative">
               <div className="relative w-full aspect-square rounded-2xl overflow-hidden shadow-2xl shadow-gray-300/50 group">
                 <Image
-                  src={"/images/p4.jpg"}
+                  src={"/images/why-choose-us.png"}
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                   alt="Why Choose Us Image"
                   fill
@@ -363,7 +350,7 @@ export default function About() {
       </section>
 
       {/* Partners/Trust Section */}
-      <section className="w-full py-16 px-6 bg-gray-50">
+      {/* <section className="w-full py-16 px-6 bg-gray-50">
         <div className="max-w-6xl mx-auto text-center">
           <p className="text-gray-500 font-medium mb-8">
             Trusted by mental health organizations worldwide
@@ -384,7 +371,7 @@ export default function About() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="w-full py-20 px-6">
@@ -405,7 +392,7 @@ export default function About() {
                 Start Free Assessment →
               </Link>
               <Link
-                href="/contact"
+                href="#"
                 className="inline-block px-10 py-4 bg-white/10 backdrop-blur-sm text-white font-semibold rounded-full border border-white/30 hover:bg-white/20 transition-all duration-300"
               >
                 Contact Us
@@ -425,31 +412,11 @@ export default function About() {
                 A supportive space designed to help you better understand your
                 emotional well-being through research-based assessments.
               </p>
-              <div className="flex gap-4 mt-6">
-                {["facebook", "twitter", "instagram", "linkedin"].map(
-                  (social) => (
-                    <Link
-                      key={social}
-                      href="#"
-                      className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:bg-[#37a0ac] hover:text-white transition-all duration-300"
-                    >
-                      <span className="sr-only">{social}</span>
-                      <svg
-                        className="w-5 h-5"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M12 2C6.477 2 2 6.477 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10z" />
-                      </svg>
-                    </Link>
-                  )
-                )}
-              </div>
             </div>
             <div>
               <h4 className="font-semibold text-white mb-4">Quick Links</h4>
               <ul className="space-y-2">
-                {["Home", "About", "Assessment", "Resources"].map((link) => (
+                {["Home", "Assessment", "About", "Resources"].map((link) => (
                   <li key={link}>
                     <Link
                       href="#"
@@ -474,7 +441,7 @@ export default function About() {
                         {link}
                       </Link>
                     </li>
-                  )
+                  ),
                 )}
               </ul>
             </div>
