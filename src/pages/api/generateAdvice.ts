@@ -22,7 +22,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       model: "gemini-3-flash-preview",
       contents: [{ parts: [{ text: prompt }] }],
     });
-    console.log(response.text);
+    console.log("RESPONSE TEXT",response.text);
+    console.log("RESPONSE LONG",response.candidates?.[0]?.content?.parts?.[0]?.text);
     const text =
       response.candidates?.[0]?.content?.parts?.[0]?.text ||
       "No response received.";
